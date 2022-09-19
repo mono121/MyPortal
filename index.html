@@ -1,0 +1,55 @@
+<!-- ToDo:全体的にリファクタリング 変数名　関数 -->
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>My Portal</title>
+    <link href="./css/base.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="./js/getData.js"></script>
+
+    <script>
+      function searchButton() {
+        const nameText = document.getElementById("nameText");
+        const portalDiv = document.getElementById("portal");
+        let i = 0;
+        let searchedCard = [];
+
+        Object.keys(sheetLists).map((card) => {
+          let i = 0;
+          for (i; i < sheetLists[card].length; i++) {
+            if (sheetLists[card][i][0].indexOf(nameText.value) > -1) {
+              searchedCard.push({
+                title: sheetLists[card][i][0],
+                content: sheetLists[card][i][1],
+                link: sheetLists[card][i][2],
+              });
+            }
+          }
+        });
+
+        displayCard(searchedCard, portalDiv);
+      }
+    </script>
+
+    <article>
+      <div class="sidebar">
+        <header>My Portal</header>
+        <ul>
+          <input type="text" name="search" id="nameText" placeholder="検索" />
+          <button onclick="searchButton()">検索</button>
+
+          <ul id="menu"></ul>
+        </ul>
+      </div>
+
+      <div class="content">
+        <div id="portal" class="wrap"></div>
+      </div>
+    </article>
+    <script src="./js/menubar.js"></script>
+    <script src="./js/displayCards.js"></script>
+  </body>
+</html>
