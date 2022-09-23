@@ -15,6 +15,34 @@ article {
     height:100%;
 }  
 
+.icon {
+    position: relative;
+    margin-left: 87.5px;
+    margin-top: 20px;
+    width: 35px;
+    height: 35px;
+    background: rgb(227, 226, 226);
+    border-radius: 50%;
+}
+
+.icon::before, .icon--add::after {
+    position: absolute;
+    top: 16.5px;
+    left: 18.5px;
+    content: '';
+    display: inline-block;
+    width: 17px;
+    height: 17px;
+    border-top: 2px solid rgb(76, 74, 74);
+    transform: translateX(-50%);
+}
+
+.icon--add:after {
+    top: 8.75px;
+    left: 1.5px;
+    transform: rotate(90deg);
+}
+
 /*--------------------------sidebar-------------------------*/
 input {
     margin-left: 10px;

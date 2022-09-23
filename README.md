@@ -2,7 +2,7 @@
 
  URLをタイトルと概要付きで管理できる自作ポータルサイト。
 
-![MyPortal](https://user-images.githubusercontent.com/54978940/191066743-be67a89e-594d-4dd3-9025-69e0034c5540.png)
+![site_screenshot](https://user-images.githubusercontent.com/54978940/191934532-3102a70a-1f0b-4969-ab8c-cb94f5882d42.png)
 
 ## 概要
 
@@ -56,7 +56,13 @@ const id = 'ここにスプレッドシートのIDを記入'
 const URL = "ここにURLを記入"
 ```
 
-あとはブラウザ上でindex.htmlが存在するpathを入力することで、スプレッドシートの内容が反映されたサイトが表示されます。
+最後にindex.htmlの29行目にスプレッドシートのURLを記入済ます。
+
+```javascript
+onclick="window.open('ここにスプレッドシートのURL', '_blank')"
+```
+
+あとはブラウザ上でindex.htmlを実行すると、スプレッドシートの内容が反映されたサイトが表示されます。
 
 ## 使用方法
 
