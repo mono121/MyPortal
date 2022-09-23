@@ -1,12 +1,16 @@
+// ------------------------パラメータ-----------------------------
+
 const URL = "ここにURLを記入";
 let menuLists = [];
-let menus = [];
-let cardLists = {};
+let cardObject = {};
 let sheetLists = [];
-let portals = [];
-let sheets = [];
+let menus = [];
+let cards = [];
 
-const getMenuData = () => {
+// --------------------------------------------------------------
+// ----------------スプレッドシートへのGETリクエスト------------------
+
+const getMenus = () => {
   return new Promise((resolve, reject) => {
     $.ajax({
       type: "GET",
@@ -17,11 +21,11 @@ const getMenuData = () => {
       },
     })
       .done(function (out) {
-        resolve(out.data);
         menuLists = out.data;
+        resolve();
       })
       .fail(function () {
-        console.log("エラー");
+        console.log("get menu error");
         reject();
       });
   });
@@ -38,34 +42,40 @@ const getSheetData = (sheetName) => {
       },
     })
       .done(function (out) {
+        cardObject[out.sheetName] = out.data;
         resolve();
-        cardLists[out.sheetName] = out.data;
       })
       .fail(function () {
-        console.log("エラー");
+        console.log("get sheetData error");
         reject();
       });
   });
 };
 
+// --------------------------------------------------------------
+// ----------------全データ取得 & 全てのカードの表示------------------
+
 (async () => {
-  await getMenuData();
-  const cardSheet = menuLists
+  await getMenus();
+  // トップ以外のmenuのリストを格納
+  const menuListsWithoutTop = menuLists
     .map((id, index) => {
       if (index === 0) return;
       else return id[0];
     })
     .filter((id) => id);
 
-  Promise.all(cardSheet.map(getSheetData)).then(() => {
-    var tmpLists = {};
-    cardSheet.map((key) => {
-      tmpLists[key] = cardLists[key];
+  // カードのデータを非同期で取得
+  Promise.all(menuListsWithoutTop.map(getSheetData)).then(() => {
+    var tmpCardLists = {};
+    // tmpCardListsにmenuと同じ順番でカードを格納
+    menuListsWithoutTop.map((key) => {
+      tmpCardLists[key] = cardObject[key];
     });
 
-    localStorage.setItem("lists", JSON.stringify(tmpLists));
+    localStorage.setItem("lists", JSON.stringify(tmpCardLists));
     sheetLists = JSON.parse(localStorage.getItem("lists"));
-    createMenu();
-    showCards(tmpLists);
+    showMenus();
+    showCards(tmpCardLists);
   });
 })();

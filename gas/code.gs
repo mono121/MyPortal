@@ -1,5 +1,5 @@
 function getData(sheetName) {
-  const id = "ここにURLを記入";
+  const id = "ここにスプレッドシートのIDを記入";
   var ss = SpreadsheetApp.openById(id).getSheetByName(sheetName);
   return (ss = ss
     .getRange(2, 1, ss.getLastRow() - 1, ss.getLastColumn())

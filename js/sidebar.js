@@ -1,7 +1,7 @@
-const innerPortal = document.getElementById("portal");
-let element = document.getElementById("mytext");
+const innerMenu = document.getElementById("menu");
+const cardTable = document.getElementById("cardTable");
 
-function clickButton(menuTitle) {
+function clickMenuButton(menuTitle) {
   var cards = [];
   let i = 0,
     j = 0;
@@ -16,18 +16,16 @@ function clickButton(menuTitle) {
     }
   }
 
-  displayCard(cards, innerPortal);
+  overwriteCard(cards, cardTable);
 }
 
-function createMenu() {
+function showMenus() {
   let i = 0;
   for (i; i < menuLists.length; i++) {
     if (menuLists[i][0] != "" || menuLists[i][1] != "") {
       menus.push({ title: menuLists[i][0] });
     }
   }
-
-  const innerMenu = document.getElementById("menu");
 
   menus.map((menu) => {
     if (menu.title === "トップ") {
@@ -41,7 +39,7 @@ function createMenu() {
     } else {
       innerMenu.innerHTML += `
 			<li>
-					<a onclick="clickButton('${menu.title}')">
+					<a onclick="clickMenuButton('${menu.title}')">
 							${menu.title}
 					</a>
 			</li>
