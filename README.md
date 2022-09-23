@@ -56,7 +56,7 @@ const id = 'ここにスプレッドシートのIDを記入'
 const URL = "ここにURLを記入"
 ```
 
-最後にindex.htmlの29行目にスプレッドシートのURLを記入済ます。
+最後にindex.htmlの29行目にスプレッドシートのURLを記入します。
 
 ```javascript
 onclick="window.open('ここにスプレッドシートのURL', '_blank')"
